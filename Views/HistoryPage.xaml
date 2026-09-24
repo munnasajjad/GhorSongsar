@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GhorSongsar.Views.HistoryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:GhorSongsar.ViewModels"
+    x:DataType="vm:HistoryViewModel"
+    Title="History">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16" RowSpacing="10">
+
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
+            <Button Text="‹" Command="{Binding PreviousMonthCommand}"
+                    FontSize="22" Padding="16,4" MinimumWidthRequest="44"
+                    BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+            <Label Grid.Column="1" Text="{Binding MonthLabel}" FontSize="20" FontAttributes="Bold"
+                   VerticalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" />
+            <Button Grid.Column="2" Text="›" Command="{Binding NextMonthCommand}"
+                    FontSize="22" Padding="16,4" MinimumWidthRequest="44"
+                    BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,*,Auto,*">
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Earned" FontSize="12" TextColor="{StaticResource Income}" HorizontalTextAlignment="Center" />
+                <Label Text="{Binding EarningsTotal}" FontSize="16" FontAttributes="Bold"
+                       TextColor="{StaticResource Income}" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" />
+            </VerticalStackLayout>
+            <BoxView Grid.Column="1" WidthRequest="1" Color="{StaticResource Gray200}" VerticalOptions="Center" />
+            <VerticalStackLayout Grid.Column="2" Spacing="2">
+                <Label Text="Spent" FontSize="12" TextColor="{StaticResource Expense}" HorizontalTextAlignment="Center" />
+                <Label Text="{Binding ExpensesTotal}" FontSize="16" FontAttributes="Bold"
+                       TextColor="{StaticResource Expense}" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" />
+            </VerticalStackLayout>
+            <BoxView Grid.Column="3" WidthRequest="1" Color="{StaticResource Gray200}" VerticalOptions="Center" />
+            <VerticalStackLayout Grid.Column="4" Spacing="2">
+                <Label Text="Balance" FontSize="12" TextColor="{StaticResource Primary}" HorizontalTextAlignment="Center" />
+                <Label Text="{Binding Balance}" FontSize="16" FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Label Grid.Row="2" Text="No entries for this month."
+               TextColor="{StaticResource Gray500}" HorizontalTextAlignment="Center" Margin="0,12,0,0"
+               IsVisible="{Binding IsEmpty}" />
+
+        <CollectionView Grid.Row="3" ItemsSource="{Binding Entries}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:TransactionItem">
+                    <Border Style="{StaticResource Card}" Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Border Grid.Column="0" BackgroundColor="{Binding TagBackground}"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 8"
+                                    Padding="8,4" VerticalOptions="Start">
+                                <Label Text="{Binding TypeLabel}" FontSize="12" FontAttributes="Bold"
+                                       TextColor="{Binding AmountColor}" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="{Binding DescriptionText}" FontSize="15" FontAttributes="Bold"
+                                       LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding DateText}" FontSize="12" TextColor="{StaticResource Gray500}" />
+                                <HorizontalStackLayout Spacing="4" Margin="0,2,0,0">
+                                    <Button Text="Edit" FontSize="11" Padding="10,2" MinimumHeightRequest="30"
+                                            BackgroundColor="Transparent" TextColor="{StaticResource Primary}"
+                                            CommandParameter="{Binding .}" Clicked="OnEditClicked" />
+                                    <Button Text="Delete" FontSize="11" Padding="10,2" MinimumHeightRequest="30"
+                                            BackgroundColor="Transparent" TextColor="{StaticResource Expense}"
+                                            CommandParameter="{Binding .}" Clicked="OnDeleteClicked" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="2" Text="{Binding AmountText}" FontSize="15" FontAttributes="Bold"
+                                   VerticalOptions="Start" TextColor="{Binding AmountColor}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

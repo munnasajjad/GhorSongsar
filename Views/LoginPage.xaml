@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GhorSongsar.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:GhorSongsar.ViewModels"
+    x:DataType="vm:LoginViewModel"
+    Title="GhorSongsar">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="28" Spacing="12" VerticalOptions="Center">
+
+            <Label Text="GhorSongsar" Style="{StaticResource Headline}" FontSize="38" FontAttributes="Bold" />
+            <Label Text="ঘর সংসার • Family Budget" FontSize="16" TextColor="{StaticResource Primary}"
+                   HorizontalOptions="Center" Margin="0,0,0,16" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="{Binding ModeHeader}" FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+
+                    <Label Text="Mobile number" FontSize="13" TextColor="{StaticResource Gray500}" />
+                    <Entry Text="{Binding Mobile}" Keyboard="Telephone" Placeholder="e.g. 01711223344" />
+
+                    <Label Text="Password" FontSize="13" TextColor="{StaticResource Gray500}" />
+                    <Entry Text="{Binding Password}" IsPassword="True" Placeholder="At least 4 characters" />
+
+                    <Label Text="Confirm password" FontSize="13" TextColor="{StaticResource Gray500}"
+                           IsVisible="{Binding IsSetupMode}" />
+                    <Entry Text="{Binding ConfirmPassword}" IsPassword="True" Placeholder="Repeat password"
+                           IsVisible="{Binding IsSetupMode}" />
+
+                    <Button Text="{Binding ButtonText}" Command="{Binding PrimaryActionCommand}"
+                            FontSize="16" FontAttributes="Bold" Margin="0,6,0,0" />
+
+                    <Label Text="{Binding Message}" TextColor="{StaticResource Expense}" FontSize="13"
+                           HorizontalTextAlignment="Center" />
+
+                    <Label Text="Your data is stored only on this phone."
+                           FontSize="12" TextColor="{StaticResource Gray500}"
+                           HorizontalTextAlignment="Center" IsVisible="{Binding IsSetupMode}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

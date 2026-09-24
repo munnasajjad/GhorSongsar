@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GhorSongsar.Views.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:GhorSongsar.ViewModels"
+    x:DataType="vm:DashboardViewModel"
+    Title="Dashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <Grid ColumnDefinitions="*,Auto" Margin="4,4,4,0">
+                <VerticalStackLayout Spacing="0">
+                    <Label Text="This Month" FontSize="14" TextColor="{StaticResource Gray500}" />
+                    <Label Text="{Binding MonthLabel}" FontSize="26" FontAttributes="Bold" />
+                </VerticalStackLayout>
+                <Button Grid.Column="1" Text="Log out" Command="{Binding LogoutCommand}"
+                        BackgroundColor="Transparent" TextColor="{StaticResource Gray500}"
+                        FontSize="12" Padding="8,4" MinimumHeightRequest="32" VerticalOptions="Start" />
+            </Grid>
+
+            <Border BackgroundColor="{StaticResource Primary}" StrokeThickness="0"
+                    StrokeShape="RoundRectangle 16" Padding="20">
+                <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                    <Label Text="Current Balance" TextColor="White" FontSize="14" HorizontalOptions="Center" />
+                    <Label Text="{Binding Balance}" TextColor="White" FontSize="34" FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,12,*">
+                <Border BackgroundColor="{StaticResource IncomeBackground}" Stroke="{StaticResource Income}"
+                        Padding="16" StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Earned this month" TextColor="{StaticResource Income}" FontSize="13" FontAttributes="Bold" />
+                        <Label Text="{Binding EarningsTotal}" TextColor="{StaticResource Income}" FontSize="22" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="2" BackgroundColor="{StaticResource ExpenseBackground}" Stroke="{StaticResource Expense}"
+                        Padding="16" StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Spent this month" TextColor="{StaticResource Expense}" FontSize="13" FontAttributes="Bold" />
+                        <Label Text="{Binding ExpensesTotal}" TextColor="{StaticResource Expense}" FontSize="22" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,12,*">
+                <Button Text="+ Add Earning" Command="{Binding AddCommand}" CommandParameter="earning"
+                        BackgroundColor="{StaticResource Income}" />
+                <Button Grid.Column="2" Text="− Add Expense" Command="{Binding AddCommand}" CommandParameter="expense"
+                        BackgroundColor="{StaticResource Expense}" />
+            </Grid>
+
+            <Label Text="Recent" FontSize="16" FontAttributes="Bold" Margin="4,8,4,0" />
+
+            <Label Text="No entries yet. Add your first earning or expense above."
+                   TextColor="{StaticResource Gray500}" HorizontalTextAlignment="Center"
+                   Margin="0,8,0,0" IsVisible="{Binding IsEmpty}" />
+
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Recent}" Spacing="8"
+                                 IsVisible="{Binding HasEntries}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TransactionItem">
+                        <Border Style="{StaticResource Card}">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                <Border Grid.Column="0" BackgroundColor="{Binding TagBackground}"
+                                        StrokeThickness="0" StrokeShape="RoundRectangle 8"
+                                        Padding="8,4" VerticalOptions="Center">
+                                    <Label Text="{Binding TypeLabel}" FontSize="12" FontAttributes="Bold"
+                                           TextColor="{Binding AmountColor}" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="{Binding DescriptionText}" FontSize="15" FontAttributes="Bold"
+                                           LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding DateText}" FontSize="12" TextColor="{StaticResource Gray500}" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="{Binding AmountText}" FontSize="16" FontAttributes="Bold"
+                                       VerticalOptions="Center" TextColor="{Binding AmountColor}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

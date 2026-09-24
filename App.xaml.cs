@@ -1,5 +1,4 @@
-﻿using GhorSongsar.Services;
-using GhorSongsar.Views;
+﻿using GhorSongsar.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GhorSongsar;
@@ -14,10 +13,7 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        var auth = MauiProgram.Services.GetRequiredService<AuthService>();
-        return auth.IsLoggedIn
-            ? new Window(new AppShell())
-            : new Window(LoginRoot());
+        return new Window(new SplashPage());
     }
 
     public static NavigationPage LoginRoot()

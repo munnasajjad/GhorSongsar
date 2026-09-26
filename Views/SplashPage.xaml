@@ -6,6 +6,6 @@
     Title="">
 
     <Grid BackgroundColor="#F9F8F3">
-        <Image Source="splash.svg" Aspect="AspectFill" />
+        <Image Source="splash.jpg" Aspect="AspectFill" />
     </Grid>
 </ContentPage>

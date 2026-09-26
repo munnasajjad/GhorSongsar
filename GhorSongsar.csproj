@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-android</TargetFrameworks>
 
 		<OutputType>Exe</OutputType>
-		<RootNamespace>Ghor Songsar</RootNamespace>
+		<RootNamespace>GhorSongsar</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -38,10 +38,10 @@
 		<MauiIcon Include="Resources\AppIcon\ghorsongsarappicon.jpg" Color="#0E7C61" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#F9F8F3" />
+		<MauiSplashScreen Include="Resources\Splash\splash.jpg"/>
 
 		<!-- Splash artwork also usable as a full-screen image -->
-		<MauiImage Include="Resources\Splash\splash.svg" BaseSize="414,896" />
+		<MauiImage Include="Resources\Splash\splash.jpg"/>
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

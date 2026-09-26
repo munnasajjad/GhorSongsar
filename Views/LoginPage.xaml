@@ -10,7 +10,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="28" Spacing="12" VerticalOptions="Center">
 
-            <Label Text="GhorSongsar" Style="{StaticResource Headline}" FontSize="38" FontAttributes="Bold" />
+            <Label Text="Ghor Songsar" Style="{StaticResource Headline}" FontSize="38" FontAttributes="Bold" />
             <Label Text="ঘর সংসার • Family Budget" FontSize="16" TextColor="{StaticResource Primary}"
                    HorizontalOptions="Center" Margin="0,0,0,16" />
 
